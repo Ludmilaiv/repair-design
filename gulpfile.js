@@ -1,31 +1,38 @@
-const gulp = require('gulp');
-
-gulp.task('hello', (done) => {
-  console.log('Привет мир!');
-  done();
-});
+const {src, dest, watch} = require('gulp');
+const browserSync = require('browser-sync').create();
+const cleanCSS = require('gulp-clean-css');
+const rename = require('gulp-rename');
+const sass = require('gulp-sass');
 
 //Для автоматического обновления страницы в браузере
-const browserSync = require('browser-sync').create();
-
-gulp.task('browser-sync', function() {
+function bs() {
+    serveSass();
     browserSync.init({
         server: {
             baseDir: "./"
         }
     });
-    gulp.watch("./*.html").on('change', browserSync.reload);
-});
+    watch("./*.html").on('change', browserSync.reload);
+    watch("./sass/**/*.sass", serveSass);
+    watch("./css/**/*.css", minCss);
+    watch("./js/*.js").on('change', browserSync.reload);
+};
 
 //для минимализации css
-let cleanCSS = require('gulp-clean-css');
-var rename = require('gulp-rename');
- 
-gulp.task('minify-css', function (done) {
-    gulp.src('./css/*.css')
+function minCss() {
+    src('./css/*.css')
         .pipe(cleanCSS())
         .pipe(rename({suffix: '.min'}))
-        .pipe(gulp.dest('./css-dist'));
-    gulp.watch("./css/*.css", gulp.parallel('minify-css'));
-});
+        .pipe(dest('./css-dist'));
+    watch("./css/*.css", parallel('minify-css'));
+};
 
+// Compile sass into CSS & auto-inject into browsers
+function serveSass() {
+    return src("./scss/*.scss")
+        .pipe(sass())
+        .pipe(dest("./css"))
+        .pipe(browserSync.stream());
+};
+
+exports.serve = bs;

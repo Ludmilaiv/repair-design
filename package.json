@@ -17,10 +17,10 @@
   },
   "homepage": "https://github.com/Ludmilaiv/repair-design#readme",
   "devDependencies": {
-    "css-min": "^1.0.0",
     "gulp": "^4.0.2",
     "gulp-clean-css": "^4.2.0",
-    "gulp-cssmin": "^0.2.0"
+    "gulp-cssmin": "^0.2.0",
+    "gulp-sass": "^4.0.2"
   },
   "dependencies": {
     "browser-sync": "^2.26.7",
