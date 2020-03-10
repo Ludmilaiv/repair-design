@@ -20,16 +20,16 @@ function bs() {
 
 //для минимализации css
 function minCss() {
-    src('./css/*.css')
+    return src('./css/*.css')
         .pipe(cleanCSS())
         .pipe(rename({suffix: '.min'}))
-        .pipe(dest('./css-dist'));
-    watch("./css/*.css", parallel('minify-css'));
+        .pipe(dest('./dist/css'))
+        .pipe(browserSync.stream());
 };
 
 // Compile sass into CSS & auto-inject into browsers
 function serveSass() {
-    return src("./scss/*.scss")
+    return src("./sass/*.sass")
         .pipe(sass())
         .pipe(dest("./css"))
         .pipe(browserSync.stream());
