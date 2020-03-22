@@ -12,4 +12,19 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
   closeBtn.addEventListener('click', switchModal);
 
+  modal.addEventListener('click', (event) => {
+    if (event.target.classList.contains('modal'))
+    {
+      switchModal();
+    } 
+  })
+
+  document.addEventListener('keydown', (event) =>{
+    if (event.code == 'Escape' && modal.classList.contains('modal--visible')) {
+      switchModal();
+    }
+  })
+
+
+
 });
