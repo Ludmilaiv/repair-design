@@ -408,6 +408,12 @@ template {
   .policy__label--center {
     justify-content: center; }
 
+label.invalid {
+  color: tomato; }
+
+input.invalid {
+  border-bottom: 1px solid tomato; }
+
 *, *:before, *:after {
   box-sizing: border-box; }
 
@@ -839,10 +845,12 @@ img {
   .modal__form {
     display: flex;
     flex-direction: column; }
-  .modal__input {
-    margin-bottom: 3.428rem; }
-    .modal__input:last-of-type {
-      margin-bottom: 1rem; }
+  .modal__input-group {
+    margin-bottom: 3.428rem;
+    display: flex;
+    flex-direction: column; }
+  .modal__input:last-of-type {
+    margin-bottom: 1rem; }
   .modal__policy {
     margin-bottom: 2.7rem; }
   .modal__button {
